@@ -27,10 +27,17 @@ const Filters = ({ onFilter }) => {
       <div>
         <h3 className="text-lg font-semibold mb-4">Categories</h3>
         <div className="flex flex-wrap gap-2">
+          <button
+            onClick={() => onFilter("")}
+            className="px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300"
+          >
+            All products
+          </button>
           {data.map((category) => (
             <button
+              onClick={() => onFilter({ category })}
               key={category}
-              className="px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300"
+              className="px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300 capitalize"
             >
               {category}
             </button>
