@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
 import ProductsGrid from "./ProductsGrid";
+import axios from "axios";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
 
-
   useEffect(() => {
-    axios.get()
-  }, [])
+    async function fetchProduct() {
+      const response = await axios.get(
+        "https://fakestoreapi.com/products"
+      );
+      setProducts(response.data);
+    }
+    fetchProduct();
+  }, []);
 
   return (
     <section className="flex-grow p-4">
