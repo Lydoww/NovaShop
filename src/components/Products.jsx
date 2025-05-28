@@ -1,24 +1,31 @@
-import React, { useState, useEffect } from "react";
 import ProductsGrid from "./ProductsGrid";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import Filters from "./Filters";
+
+const fetchProducts = async () => {
+  try {
+    const { data } = await axios.get("https://fakestoreapi.com/products");
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchProducts,
+  });
 
-  useEffect(() => {
-    async function fetchProduct() {
-      const response = await axios.get(
-        "https://fakestoreapi.com/products"
-      );
-      setProducts(response.data);
-    }
-    fetchProduct();
-  }, []);
+  if (isLoading) return <div>Loading products...</div>;
+  if (error) return <div>Error when fetching products</div>;
 
   return (
-    <section className="flex-grow p-4">
-      <ProductsGrid products={products} />
-    </section>
+    <main className=" flex  bg-gray-100">
+      <Filters onFilter={() => {}} />
+      <ProductsGrid products={data} />
+    </main>
   );
 };
 
