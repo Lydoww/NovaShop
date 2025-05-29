@@ -1,22 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import PropTypes from "prop-types";
-
-const fetchCategories = async () => {
-  try {
-    const { data } = await axios.get(
-      "https://fakestoreapi.com/products/categories"
-    );
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+import { productsService } from "../services/ProductService";
 
 const Filters = ({ filters, onFilter }) => {
-  const { data, error, isLoading } = useQuery({
+  const {
+    data = [],
+    error,
+    isLoading,
+  } = useQuery({
     queryKey: ["categories"],
-    queryFn: fetchCategories,
+    queryFn: () => productsService.getCategories(),
   });
 
   if (isLoading) return <div>Loading categories...</div>;
