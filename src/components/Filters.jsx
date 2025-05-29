@@ -1,18 +1,32 @@
-import { useQuery } from "@tanstack/react-query";
 import PropTypes from "prop-types";
-import { productsService } from "../services/ProductService";
+import { useCategories } from "../hooks/useCategories";
 
-const Filters = ({ filters, onFilter }) => {
-  const {
-    data = [],
-    error,
-    isLoading,
-  } = useQuery({
-    queryKey: ["categories"],
-    queryFn: () => productsService.getCategories(),
-  });
+function SkeletonFilters() {
+  return (
+    <aside className="w-1/4 p-4 bg-white mb-4 animated-pulse">
+      <div className="mb-4">
+        <div className="h-4 bg-gray-200 w-1/3 mb-4 rounded" />
+        <div className="h-10 bg-gray-200 rounded-md" />
+      </div>
 
-  if (isLoading) return <div>Loading categories...</div>;
+      <div className="mb-4">
+        <div className="h-4 bg-gray-200 w-1/3 mb-4 rounded" />
+        <div className="flex flex-wrap gap-2">
+          {[...Array(4)].map((_, i) => (
+            <div key={i}>
+              <div className=" h-8 w-20 bg-gray-200 rounded-full" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+const Filters = ({ filters, onFilter, loading }) => {
+  const { data, error, isLoading } = useCategories();
+
+  if (loading) return <SkeletonFilters />;
   if (error) return <div>Error fetching categories</div>;
 
   return (

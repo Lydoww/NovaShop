@@ -1,26 +1,21 @@
 import ProductsGrid from "./ProductsGrid";
-import { useQuery } from "@tanstack/react-query";
 import Filters from "./Filters";
 import { useState } from "react";
-import { productsService } from "../services/ProductService";
+import { useProducts } from "../hooks/useProducts";
 
 const Products = () => {
   const [filters, setFilters] = useState({
     category: "",
     sort: "asc",
   });
-  const { data, error, isLoading } = useQuery({
-    queryKey: ["products", filters],
-    queryFn: () => productsService.getProduct(filters),
-  });
+  const { data, error, isLoading } = useProducts(filters);
 
-  if (isLoading) return <div className="min-h-screen">Loading products...</div>;
   if (error) return <div>Error when fetching products</div>;
 
   return (
     <main className=" flex bg-gray-100">
-      <Filters filters={filters} onFilter={setFilters} />
-      <ProductsGrid products={data} />
+      <Filters filters={filters} onFilter={setFilters} loading={isLoading} />
+      <ProductsGrid loading={isLoading} products={data} />
     </main>
   );
 };
