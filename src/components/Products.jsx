@@ -10,6 +10,9 @@ const fetchProducts = async ({ queryKey }) => {
   if (filters.category) {
     url += `/category/${filters.category}`;
   }
+  if (filters.sort) {
+    url += `?sort=${filters.sort}`;
+  }
   try {
     const { data } = await axios.get(url);
     console.log(data);
@@ -22,18 +25,19 @@ const fetchProducts = async ({ queryKey }) => {
 const Products = () => {
   const [filters, setFilters] = useState({
     category: "",
+    sort: "asc",
   });
   const { data, error, isLoading } = useQuery({
     queryKey: ["products", filters],
     queryFn: fetchProducts,
   });
 
-  if (isLoading) return <div>Loading products...</div>;
+  if (isLoading) return <div className="min-h-screen">Loading products...</div>;
   if (error) return <div>Error when fetching products</div>;
 
   return (
-    <main className=" flex  bg-gray-100">
-      <Filters onFilter={setFilters} />
+    <main className=" flex bg-gray-100">
+      <Filters filters={filters} onFilter={setFilters} />
       <ProductsGrid products={data} />
     </main>
   );
