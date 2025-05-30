@@ -1,22 +1,71 @@
 import { useParams } from "react-router";
 import { useProduct } from "../hooks/useProduct";
-import { use } from "react";
+import { use, useState } from "react";
 import { CartContext } from "../context/CartContext";
+import styled from "@emotion/styled";
+import { keyframes } from "@emotion/react";
+
+const fadeIn = keyframes`
+  from {
+  opacity: 0;
+  transform: translateY(-10px);
+  } to {
+  opacity: 1;
+  transform: translateY(0) 
+  }
+`;
+
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+`;
+
+const NotificationWrapper = styled.div`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #10b981;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  animation: ${({ isExisting }) => (isExisting ? fadeOut : fadeIn)} 0.4s
+    ease-out;
+`;
 
 const Product = () => {
   const { id } = useParams();
   const { data, error, isLoading } = useProduct(id);
   const { addItem } = use(CartContext);
+  const [showNotification, setShowNotification] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
 
   if (isLoading) return <div>Loading product details</div>;
   if (error) return <div>Error fetching product details</div>;
 
   const handleAddToCart = () => {
     addItem(data);
+    setShowNotification(true);
+    setIsExiting(false);
+
+    setTimeout(() => {
+      setIsExiting(true);
+      setTimeout(() => setShowNotification(false), 400);
+    }, 2000);
   };
 
   return (
     <div className="p-8 max-w-4xl mx-auto">
+      {showNotification && (
+        <NotificationWrapper isExisting={isExiting}>
+          Item added to the cart
+        </NotificationWrapper>
+      )}
       <div className="grid md:grid-cols-2 gap-8 min-h-[70vh]">
         <div className="flex flex-col justify-center">
           <img
@@ -54,7 +103,7 @@ const Product = () => {
               ({data.rating.count} reviews)
             </span>
           </div>
-          <div className="mt-auto">
+          <div>
             <p className="text-3xl font-bold text-blue-600 mb-8">
               ${data.price}
             </p>
