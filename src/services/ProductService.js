@@ -6,7 +6,7 @@ class ProductsService extends HttpService {
     super(httpClient);
   }
 
-  async getProduct(filters = {}) {
+  async getProducts(filters = {}) {
     let url = "/products";
     if (filters.category) {
       url += `/category/${filters.category}`;
@@ -20,6 +20,10 @@ class ProductsService extends HttpService {
 
   async getCategories() {
     return this.get("/products/categories");
+  }
+
+  async getProduct(id) {
+    return this.get(`/products/${id}`);
   }
 }
 

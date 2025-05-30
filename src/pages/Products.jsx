@@ -1,5 +1,5 @@
-import ProductsGrid from "./ProductsGrid";
-import Filters from "./Filters";
+import ProductsGrid from "../components/ProductsGrid";
+import Filters from "../components/Filters";
 import { useState } from "react";
 import { useProducts } from "../hooks/useProducts";
 
