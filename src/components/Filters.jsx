@@ -75,7 +75,7 @@ const Filters = ({ filters, onFilter, loading }) => {
   );
 };
 
-Filters.PropTypes = {
+Filters.propTypes = {
   filters: PropTypes.shape({
     category: PropTypes.string,
     sort: PropTypes.string,

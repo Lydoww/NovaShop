@@ -1,12 +1,19 @@
 import { useParams } from "react-router";
 import { useProduct } from "../hooks/useProduct";
+import { use } from "react";
+import { CartContext } from "../context/CartContext";
 
 const Product = () => {
   const { id } = useParams();
   const { data, error, isLoading } = useProduct(id);
+  const { addItem } = use(CartContext);
 
   if (isLoading) return <div>Loading product details</div>;
   if (error) return <div>Error fetching product details</div>;
+
+  const handleAddToCart = () => {
+    addItem(data);
+  };
 
   return (
     <div className="p-8 max-w-4xl mx-auto">
@@ -51,7 +58,10 @@ const Product = () => {
             <p className="text-3xl font-bold text-blue-600 mb-8">
               ${data.price}
             </p>
-            <button className="w-full bg-blue-600 text-white px-6 py-4 rounded-lg hover:bg-blue-700 transition-colors text-lg">
+            <button
+              onClick={handleAddToCart}
+              className="w-full bg-blue-600 text-white px-6 py-4 rounded-lg hover:bg-blue-700 transition-colors text-lg"
+            >
               Add to Cart
             </button>
           </div>

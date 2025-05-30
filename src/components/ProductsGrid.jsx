@@ -38,7 +38,7 @@ const ProductsGrid = ({ products, loading }) => {
   );
 };
 
-ProductsGrid.PropTypes = {
+ProductsGrid.propTypes = {
   products: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
