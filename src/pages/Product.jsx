@@ -29,7 +29,7 @@ const fadeOut = keyframes`
 const NotificationWrapper = styled.div`
   position: absolute;
   top: 1rem;
-  right: 1rem;
+  right: 5rem;
   background-color: #10b981;
   color: white;
   padding: 0.5rem 1rem;

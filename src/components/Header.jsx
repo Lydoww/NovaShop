@@ -7,7 +7,7 @@ const Header = () => {
         <h1 className="text-lg font-bold">Trendy Mart</h1>
       </NavLink>
       <NavLink
-        to="/checkout"
+        to="/cart"
         className="p-2 hover:bg-blue-700 transition-colors rounded-full"
       >
         <img src={Cart} alt="Cart icon" className="w-6 h-6" />
