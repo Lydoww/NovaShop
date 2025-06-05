@@ -1,12 +1,37 @@
-# React + Vite
+# 🛍️ NovaShop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**NovaShop** is a modern e-commerce web app built with **React** and styled using **TailwindCSS**. It uses the [FakeStoreAPI](https://fakestoreapi.com/) as a mock backend to simulate real-world e-commerce functionality. The project leverages **TanStack Query** for efficient data fetching and caching, and **React Context API** for global state management (e.g., the shopping cart).
 
-Currently, two official plugins are available:
+### 🌐 Live demo:
+➡️ [https://novashop.netlify.app/](https://novashop.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ⚛️ **React** – Frontend library
+- 💨 **TailwindCSS** – Utility-first CSS framework for rapid UI development
+- 📦 **FakeStoreAPI** – Fake REST API for products, categories, etc.
+- 🔄 **TanStack Query** (`@tanstack/react-query`) – For async state, data fetching, caching, and more
+- 🌐 **React Router** – For routing between product and checkout pages
+- 🧠 **React Context API** – For managing global app state like the cart
+
+---
+
+## 📸 Features
+
+- 🛒 Browse a list of products
+- 📂 Filter products by category
+- 🧾 View detailed product information
+- 🧺 Add items to cart and manage quantities
+- 💳 Checkout with form validation and simulated order submission
+- ⚡ Loading skeletons for better UX while data is loading
+
+---
+
+## 🧑‍💻 Author
+
+**Alexis Helm**  
+Full-Stack Developer – React | Typescript | Node.Js  
+[LinkedIn](https://www.linkedin.com/in/alexis-helm/)
+
