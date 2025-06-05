@@ -1,8 +1,15 @@
 import PropTypes from "prop-types";
+import { useFormStatus } from "react-dom";
 
 export default function CheckoutForm({ onSubmit }) {
+  const { pending } = useFormStatus();
+  function handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    onSubmit({ formData });
+  }
   return (
-    <form className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label
           htmlFor="name"
@@ -26,7 +33,7 @@ export default function CheckoutForm({ onSubmit }) {
           Email
         </label>
         <input
-          type="text"
+          type="email"
           id="email"
           name="email"
           className="w-full px-3 py-2 border rounded-md"
@@ -82,9 +89,10 @@ export default function CheckoutForm({ onSubmit }) {
       </div>
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+        className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:bg-blue-400"
+        disabled={pending}
       >
-        Place Order
+        {pending ? "Processing order..." : "Place Order"}
       </button>
     </form>
   );
