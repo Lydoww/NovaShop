@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CartContext } from "./CartContext";
 import PropTypes from "prop-types";
 
 export function CartProvider({ children }) {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(items));
+  }, [items]);
 
   const addItem = (product) => {
     setItems((currentItems) => {
@@ -39,20 +46,27 @@ export function CartProvider({ children }) {
     );
   };
 
-  let cartCount = 0
-  for(const item of items) {
-    cartCount = cartCount + item.quantity
+  let cartCount = 0;
+  for (const item of items) {
+    cartCount = cartCount + item.quantity;
   }
 
   let cartTotal = 0;
-  for(const item of items) {
+  for (const item of items) {
     const itemTotal = item.price * item.quantity;
-    cartTotal = cartTotal + itemTotal
+    cartTotal = cartTotal + itemTotal;
   }
 
   return (
     <CartContext.Provider
-      value={{ items, addItem, removeItem, updateQuantity, cartCount, cartTotal }}
+      value={{
+        items,
+        addItem,
+        removeItem,
+        updateQuantity,
+        cartCount,
+        cartTotal,
+      }}
     >
       {children}
     </CartContext.Provider>
