@@ -3,10 +3,13 @@ import { CartContext } from "../context/CartContext";
 import CartSummary from "../components/CartSummary";
 import CheckoutForm from "../components/CheckoutForm";
 import { useCheckout } from "../hooks/useCheckout";
+import { useNavigate } from "react-router";
 
 const Checkout = () => {
-  const { items, cartTotal } = use(CartContext);
+  const { items, cartTotal, clearCart } = use(CartContext);
   const { mutateAsync: submitCheckout } = useCheckout();
+  const navigate = useNavigate();
+
   if (items.length === 0)
     return (
       <div className="p-8 max-w-4xl mx-auto">
@@ -34,6 +37,8 @@ const Checkout = () => {
         },
       };
       await submitCheckout(orderData);
+      clearCart();
+      navigate("/checkout/success");
     } catch (error) {
       console.log(`Checkout failed: ${error}`);
       alert("Failed to process the checkout");
