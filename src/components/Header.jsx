@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header className="bg-blue-600 text-white p-4 flex justify-between items-center">
       <NavLink to="/" className="hover:opacity-80 transition-opacity">
-        <h1 className="text-lg font-bold">Trendy Mart</h1>
+        <h1 className="text-lg font-bold">NovaShop</h1>
       </NavLink>
       <NavLink
         to="/cart"
