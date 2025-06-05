@@ -10,13 +10,13 @@ export default function CartSummary({ items, cartTotal }) {
             <span>
               {item.title} (x{item.quantity})
             </span>
-            <span>${item.price}</span>
+            <span>${(item.price * item.quantity).toFixed(2)}</span>
           </div>
         ))}
         <div className="border-t border-gray-300 pt-2 ">
           <div className="flex justify-between font-semibold">
             <span>Total</span>
-            <span>${cartTotal}</span>
+            <span>${cartTotal.toFixed(2)}</span>
           </div>
         </div>
       </div>
