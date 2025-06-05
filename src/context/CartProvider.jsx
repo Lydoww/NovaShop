@@ -44,9 +44,15 @@ export function CartProvider({ children }) {
     cartCount = cartCount + item.quantity
   }
 
+  let cartTotal = 0;
+  for(const item of items) {
+    const itemTotal = item.price * item.quantity;
+    cartTotal = cartTotal + itemTotal
+  }
+
   return (
     <CartContext.Provider
-      value={{ items, addItem, removeItem, updateQuantity }}
+      value={{ items, addItem, removeItem, updateQuantity, cartCount, cartTotal }}
     >
       {children}
     </CartContext.Provider>
