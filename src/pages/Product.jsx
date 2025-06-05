@@ -4,6 +4,7 @@ import { use, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
+import SkeletonProductDetail from "../components/skeletons/SkeletonProductDetail";
 
 const fadeIn = keyframes`
   from {
@@ -45,7 +46,7 @@ const Product = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
 
-  if (isLoading) return <div>Loading product details</div>;
+  if (isLoading) return <SkeletonProductDetail />;
   if (error) return <div>Error fetching product details</div>;
 
   const handleAddToCart = () => {
