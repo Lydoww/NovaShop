@@ -24,7 +24,7 @@ export default function CartSummary({ items, cartTotal }) {
   );
 }
 
-CartSummary.protoTypes = {
+CartSummary.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
