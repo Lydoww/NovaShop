@@ -3,7 +3,7 @@
 **NovaShop** is a modern e-commerce web app built with **React** and styled using **TailwindCSS**. It uses the [FakeStoreAPI](https://fakestoreapi.com/) as a mock backend to simulate real-world e-commerce functionality. The project leverages **TanStack Query** for efficient data fetching and caching, and **React Context API** for global state management (e.g., the shopping cart).
 
 ### 🌐 Live demo:
-➡️ [https://novashop.netlify.app/](https://novashop.netlify.app/)
+➡️ [NovaShop](https://ecommerce-two-gray-92.vercel.app/)
 
 ---
 
